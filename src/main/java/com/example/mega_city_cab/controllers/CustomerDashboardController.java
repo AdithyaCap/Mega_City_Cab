@@ -40,7 +40,7 @@ public class CustomerDashboardController extends HttpServlet {
         request.setAttribute("bookings", bookings);
 
         // Forward the request to customer dashboard page
-        request.getRequestDispatcher("customer-dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("customer-user-dashboard.jsp").forward(request, response);
     }
 
 }

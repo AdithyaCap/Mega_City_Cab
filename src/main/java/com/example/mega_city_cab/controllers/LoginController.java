@@ -20,6 +20,8 @@ public class LoginController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        System.out.println("Login user");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
 
@@ -28,7 +30,21 @@ public class LoginController extends HttpServlet {
         if (user != null) {
             // If authentication is successful, store user information in the session
             request.getSession().setAttribute("user", user);
-            response.sendRedirect("dashboard.jsp");  // Redirect to the dashboard after login
+//            response.sendRedirect("admin-user-dashboard.jsp");  // Redirect to the dashboard after login
+            String userRole = user.getRole(); // Assuming the user object has a getRole() method
+
+            System.out.println(userRole);
+
+            if ("Admin".equalsIgnoreCase(userRole)) {
+                // Redirect to the admin dashboard
+                response.sendRedirect("admin-dashboard.jsp");
+            } else if ("User".equalsIgnoreCase(userRole)) {
+                // Redirect to the regular user dashboard
+                response.sendRedirect("user-dashboard.jsp");
+            } else {
+                // Redirect to a default dashboard or error page if the role is unknown
+                response.sendRedirect("default-user-dashboard.jsp");
+            }
         } else {
             // If authentication fails, set an error message and redirect back to login page
             request.setAttribute("error", "Invalid username or password!");
