@@ -13,12 +13,12 @@ public class LoginController extends HttpServlet {
 
     private LoginService loginService;
 
-    @Override
+
     public void init() {
         loginService = new LoginService();
     }
 
-    @Override
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         System.out.println("Login user");
@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
         }
     }
 
-    @Override
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // For GET requests, just forward to login page
         request.getRequestDispatcher("login.jsp").forward(request, response);
