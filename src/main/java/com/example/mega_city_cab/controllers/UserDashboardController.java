@@ -42,8 +42,5 @@ public class UserDashboardController extends HttpServlet {
                 request.getRequestDispatcher("user-dashboard.jsp").forward(request, response);
         }
 
-
-
-
     }
 }

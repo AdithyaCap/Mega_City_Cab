@@ -28,11 +28,11 @@ public class User {
     }
 
     // Constructor for admin/driver (with only basic fields)
-    public User() {
+    public User(String username, String address, String nic, String phoneNumber, String email, String password, String role) {
         this.id = id;
         this.setUsername(getUsername());
-        this.password = password;
-        this.role = role;
+        this.password = this.password;
+        this.role = this.role;
     }
 
     public User(String username, String address, String nic, String phoneNumber, String email, String password) {
@@ -42,6 +42,11 @@ public class User {
         this.nic = nic;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 
@@ -126,4 +131,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
 }

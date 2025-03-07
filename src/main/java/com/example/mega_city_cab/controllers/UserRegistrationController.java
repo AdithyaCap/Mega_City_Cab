@@ -25,15 +25,17 @@ public class UserRegistrationController extends HttpServlet {
         String phoneNumber = request.getParameter("phone_number");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        String role = request.getParameter("role");
 
         // Create a generic User object (not customer-specific)
-        User user = new User(username, address, nic, phoneNumber, email, password);
+        User user = new User(username, address, nic, phoneNumber, email, password, role);
         user.setUsername(username);
         user.setAddress(address);
         user.setNic(nic);
         user.setPhoneNumber(phoneNumber);
         user.setEmail(email);
         user.setPassword(password);
+        user.setRole(role);
 
         boolean success = userService.registerUser(user);
         if (success) {

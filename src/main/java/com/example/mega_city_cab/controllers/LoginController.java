@@ -28,25 +28,21 @@ public class LoginController extends HttpServlet {
         User user = loginService.authenticateUser(username, password);
 
         if (user != null) {
-            // If authentication is successful, store user information in the session
-            request.getSession().setAttribute("user", user);
-//            response.sendRedirect("admin-user-dashboard.jsp");  // Redirect to the dashboard after login
-            String userRole = user.getRole(); // Assuming the user object has a getRole() method
 
+            request.getSession().setAttribute("user", user);
+            String userRole = user.getRole();
             System.out.println(userRole);
 
             if ("Admin".equalsIgnoreCase(userRole)) {
-                // Redirect to the admin dashboard
                 response.sendRedirect("admin-dashboard.jsp");
             } else if ("User".equalsIgnoreCase(userRole)) {
-                // Redirect to the regular user dashboard
                 response.sendRedirect("user-dashboard.jsp");
+            } else if ("Driver".equalsIgnoreCase(userRole)) {
+                response.sendRedirect("driver-dashboard.jsp");
             } else {
-                // Redirect to a default dashboard or error page if the role is unknown
                 response.sendRedirect("default-user-dashboard.jsp");
             }
         } else {
-            // If authentication fails, set an error message and redirect back to login page
             request.setAttribute("error", "Invalid username or password!");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
@@ -54,7 +50,6 @@ public class LoginController extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // For GET requests, just forward to login page
         request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 

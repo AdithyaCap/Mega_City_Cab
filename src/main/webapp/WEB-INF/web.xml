@@ -36,7 +36,13 @@
         <servlet-name>UserRegistrationController</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
-
-
+    <servlet>
+        <servlet-name>DriverController</servlet-name>
+        <servlet-class>com.example.mega_city_cab.controllers.DriverController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DriverController</servlet-name>
+        <url-pattern>/driver-dashboard</url-pattern>
+    </servlet-mapping>
 
 </web-app>

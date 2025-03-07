@@ -53,7 +53,7 @@ public class AdminDashboardController extends HttpServlet {
         request.setAttribute("drivers", drivers);
 
         // Forward to the admin dashboard page
-        request.getRequestDispatcher("admin-user-dashboard.jsp").forward(request, response);
+        request.getRequestDispatcher("admin-dashboard.jsp").forward(request, response);
     }
 
 
