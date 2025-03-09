@@ -7,88 +7,105 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 80%;
     margin: 20px auto;
-    background: white;
+    background: #fff;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
 }
 
 header h1 {
-    font-size: 24px;
-    color: #333;
+    margin: 0;
 }
 
-.logout-btn {
-    background: #dc3545;
+.logout-link {
     color: white;
-    border: none;
-    padding: 8px 16px;
-    cursor: pointer;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.booking-form, .booking-history {
+    margin-top: 20px;
+    padding: 15px;
+    background: #fff;
     border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
-.booking-form {
-    background: #f9f9f9;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-}
-
-.booking-form h2 {
-    margin-bottom: 15px;
+h2 {
     color: #007bff;
+    border-bottom: 2px solid #007bff;
+    padding-bottom: 5px;
 }
 
-.booking-form label {
+label {
+    font-weight: bold;
     display: block;
     margin: 10px 0 5px;
 }
 
-.booking-form input, .booking-form select {
+select, input[type="text"], button {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.booking-form button {
-    background: #28a745;
+button {
+    background: #007bff;
     color: white;
-    padding: 10px 15px;
     border: none;
     cursor: pointer;
+    font-size: 16px;
 }
 
-.booking-form button:hover {
-    background: #218838;
+button:hover {
+    background: #0056b3;
 }
 
-.booking-history h2 {
-    margin-bottom: 15px;
-    color: #007bff;
-}
-
+/* Booking History Table */
 table {
     width: 100%;
     border-collapse: collapse;
+    margin-top: 10px;
 }
 
-table th, table td {
+table, th, td {
     border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
 }
 
-table th {
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
     background: #007bff;
     color: white;
 }
 
+tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
+tbody tr:hover {
+    background: #f1f1f1;
+}
+
+span {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px; /* Adjust spacing if needed */
+}
