@@ -30,6 +30,7 @@ public class LoginController extends HttpServlet {
         if (user != null) {
 
             request.getSession().setAttribute("user", user);
+//            request.getSession().setAttribute("loggedUser", user);
             String userRole = user.getRole();
             System.out.println(userRole);
 
