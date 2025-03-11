@@ -26,7 +26,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserDashboardController</servlet-name>
-        <url-pattern>/UserDashboardController</url-pattern>
+        <url-pattern>/user-dashboard</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>UserRegistrationController</servlet-name>
@@ -43,6 +43,14 @@
     <servlet-mapping>
         <servlet-name>DriverController</servlet-name>
         <url-pattern>/driver-dashboard</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <servlet-class>com.example.mega_city_cab.controllers.AdminDashboardController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminDashboardController</servlet-name>
+        <url-pattern>/admin-dashboard</url-pattern>
     </servlet-mapping>
 
 </web-app>

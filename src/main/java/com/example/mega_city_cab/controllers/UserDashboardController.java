@@ -16,31 +16,20 @@ public class UserDashboardController extends HttpServlet {
 
     private BookingService bookingService = new BookingService();
 
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        // Check if session is null or user is not logged in
+        if (user == null) {
             response.sendRedirect("login.jsp");
             return;
         }
 
-        // Check if the user is logged in
-        String action = request.getParameter("action");
-        switch (action) {
-            case "view":
-                // Get the logged-in user's username
-                User username = (User) session.getAttribute("user");
+            List<Booking> bookings = bookingService.getBookingsByUsername(user.getId());
 
-                // Fetch booking history for this user
-                List<Booking> bookings = bookingService.getBookingsByUsername(String.valueOf(username.getId()));
-
-                // Set bookings in request attribute
-                request.setAttribute("bookings", bookings);
-
-                // Forward to user dashboard page
-                request.getRequestDispatcher("user-dashboard.jsp").forward(request, response);
-        }
-
+            request.setAttribute("bookings", bookings);
+            request.getRequestDispatcher("user-dashboard.jsp").forward(request, response);
     }
 }

@@ -60,6 +60,6 @@ public class BookRideController extends HttpServlet {
         bookingService.createBooking(booking);
 
         // Redirect back to dashboard
-        response.sendRedirect("UserDashboardController?action=view");
+        response.sendRedirect("user-dashboard");
     }
 }

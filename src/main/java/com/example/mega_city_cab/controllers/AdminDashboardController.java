@@ -2,11 +2,11 @@ package com.example.mega_city_cab.controllers;
 
 import com.example.mega_city_cab.models.Booking;
 import com.example.mega_city_cab.models.Car;
-import com.example.mega_city_cab.models.Driver;
+//import com.example.mega_city_cab.models.Driver;
 import com.example.mega_city_cab.models.User;
 import com.example.mega_city_cab.services.BookingService;
 import com.example.mega_city_cab.services.CarService;
-import com.example.mega_city_cab.services.DriverService;
+//import com.example.mega_city_cab.services.DriverService;
 import com.example.mega_city_cab.services.UserService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -23,21 +23,21 @@ public class AdminDashboardController extends HttpServlet {
     private BookingService bookingService;
     private UserService UserService;
     private CarService carService;
-    private DriverService driverService;
+//    private DriverService driverService;
 
 
     public void init() {
         bookingService = new BookingService();
         UserService = new UserService();
         carService = new CarService();
-        driverService = new DriverService();
+//        driverService = new DriverService();
     }
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Get logged-in admin details from session
         HttpSession session = request.getSession();
-        if (session.getAttribute("user") == null || !"admin".equals(((User) session.getAttribute("user")).getRole())) {
+        if (session.getAttribute("user") == null || !"Admin".equals(((User) session.getAttribute("user")).getRole())) {
             response.sendRedirect("login.jsp");
             return;
         }
@@ -46,13 +46,14 @@ public class AdminDashboardController extends HttpServlet {
         List<Booking> bookings = bookingService.getAllBookings();
         List<User> users = UserService.getAllUsers();
         List<Car> cars = carService.getAllCars();
-        List<Driver> drivers = driverService.getAllDrivers();
+//        List<Driver> drivers = driverService.getAllDrivers();
 
         // Set attributes for display
+//        System.err.println("Bookings: " + bookings);
         request.setAttribute("bookings", bookings);
         request.setAttribute("customers", users);
         request.setAttribute("cars", cars);
-        request.setAttribute("drivers", drivers);
+//        request.setAttribute("drivers", drivers);
 
         // Forward to the admin dashboard page
         request.getRequestDispatcher("admin-dashboard.jsp").forward(request, response);
