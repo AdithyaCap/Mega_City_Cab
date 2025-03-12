@@ -51,7 +51,6 @@ public class AdminDashboardController extends HttpServlet {
 
 
         // Set attributes for display
-//        System.err.println("Bookings: " + bookings);
         request.setAttribute("bookings", bookings);
         request.setAttribute("customers", users);
         request.setAttribute("cars", cars);
