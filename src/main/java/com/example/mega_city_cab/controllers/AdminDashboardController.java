@@ -8,6 +8,7 @@ import com.example.mega_city_cab.services.BookingService;
 import com.example.mega_city_cab.services.CarService;
 //import com.example.mega_city_cab.services.DriverService;
 import com.example.mega_city_cab.services.UserService;
+import com.mysql.cj.jdbc.Driver;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,14 +24,14 @@ public class AdminDashboardController extends HttpServlet {
     private BookingService bookingService;
     private UserService UserService;
     private CarService carService;
-//    private DriverService driverService;
+    private UserService driverService;
 
 
     public void init() {
         bookingService = new BookingService();
         UserService = new UserService();
         carService = new CarService();
-//        driverService = new DriverService();
+        driverService = new UserService();
     }
 
 
@@ -46,17 +47,19 @@ public class AdminDashboardController extends HttpServlet {
         List<Booking> bookings = bookingService.getAllBookings();
         List<User> users = UserService.getAllUsers();
         List<Car> cars = carService.getAllCars();
-//        List<Driver> drivers = driverService.getAllDrivers();
+        List<User> drivers = driverService.getAllDrivers();
+
 
         // Set attributes for display
 //        System.err.println("Bookings: " + bookings);
         request.setAttribute("bookings", bookings);
         request.setAttribute("customers", users);
         request.setAttribute("cars", cars);
-//        request.setAttribute("drivers", drivers);
+        request.setAttribute("drivers", drivers);
 
         // Forward to the admin dashboard page
         request.getRequestDispatcher("admin-dashboard.jsp").forward(request, response);
+
     }
 
 
