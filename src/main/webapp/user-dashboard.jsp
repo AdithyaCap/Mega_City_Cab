@@ -17,6 +17,8 @@
   User username = (User) userSession.getAttribute("username");
 
   List<Booking> bookingList = (List<Booking>) request.getAttribute("bookings");
+  List<Booking> inProgressBookings = (List<Booking>) request.getAttribute("inProgressBookings");
+
 %>
 
 <!DOCTYPE html>
@@ -179,6 +181,43 @@
       </tbody>
     </table>
   </section>
+
+  <section class="in-progress-bookings">
+    <h2>In Progress Bookings</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Booking No</th>
+        <th>Pickup Location</th>
+        <th>Destination</th>
+        <th>Car Type</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% if (inProgressBookings != null && !inProgressBookings.isEmpty()) {
+        for (Booking booking : inProgressBookings) { %>
+      <tr>
+        <td><%= booking.getId() %></td>
+        <td><%= booking.getPickupLocation() %></td>
+        <td><%= booking.getDropLocation() %></td>
+        <td><%= booking.getCarId() %></td>
+        <td>LKR <%= booking.getFare() %></td>
+        <td><%= booking.getStatus() %></td>
+      </tr>
+      <% }
+      } else { %>
+      <tr>
+        <td colspan="6">No in-progress bookings found.</td>
+      </tr>
+      <% } %>
+      </tbody>
+    </table>
+  </section>
+
+
+
 </div>
 <script>
   // Define base fares for different car types

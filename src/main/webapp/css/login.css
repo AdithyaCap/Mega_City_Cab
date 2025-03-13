@@ -24,7 +24,7 @@ form {
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-    width: 450px;
+    width: 350px;
     text-align: center;
 }
 
@@ -50,7 +50,7 @@ input {
 
 button {
     width: 100%;
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     padding: 12px;
     border: none;
@@ -62,7 +62,7 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
 }
 
 /* Register Link */
@@ -73,7 +73,7 @@ div p {
 }
 
 a {
-    color: #28a745;
+    color: #007bff;
     text-decoration: none;
     font-weight: bold;
 }

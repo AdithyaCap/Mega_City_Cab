@@ -111,6 +111,85 @@ public class BookingDAO {
         return bookings;
     }
 
+    public List<Booking> getAllPendingBookings() {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM bookings WHERE status = ?";
+
+        try (Connection con = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "Pending");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = mapResultSetToBooking(rs);
+                bookings.add(booking);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookings;
+    }
+
+    public boolean updateBookingStatus(int bookingId, String newStatus) {
+        String sql = "UPDATE bookings SET status = ? WHERE booking_id = ?";
+
+        try (Connection con = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, newStatus);
+            ps.setInt(2, bookingId);
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public List<Booking> getAllInProgressBookings() {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM bookings WHERE status = ?";
+
+        try (Connection con = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "In Progress");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = mapResultSetToBooking(rs);
+                bookings.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookings;
+    }
+
+    public List<Booking> getInProgressBookingsByUserId(int userId) {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM bookings WHERE status = ? AND user_id = ?";
+
+        try (Connection con = DatabaseConnection.getInstance().getConnection();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, "In Progress");
+            ps.setInt(2, userId);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Booking booking = mapResultSetToBooking(rs);
+                bookings.add(booking);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bookings;
+    }
+
+
+
     // Utility method to map ResultSet to Booking object
     private Booking mapResultSetToBooking(ResultSet rs) throws SQLException {
         Booking booking = new Booking();

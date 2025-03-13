@@ -14,54 +14,60 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
-
 
 public class DriverController extends HttpServlet {
     private BookingService bookingService;
     private UserService userService;
+
 
     public void init() {
         bookingService = new BookingService();
         userService = new UserService();
     }
 
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("login.jsp?error=Please login first");
+            response.sendRedirect("login.jsp?error=" + URLEncoder.encode("Please login first", StandardCharsets.UTF_8));
             return;
         }
 
         User loggedUser = (User) session.getAttribute("user");
 
         if (!"Driver".equals(loggedUser.getRole())) {
-            response.sendRedirect("login.jsp?error=Unauthorized access");
+            response.sendRedirect("login.jsp?error=" + URLEncoder.encode("Unauthorized access", StandardCharsets.UTF_8));
             return;
         }
 
-        // Retrieve only pending bookings for the driver
-        List<Booking> assignedBookings = bookingService.getBookingsByUsername(loggedUser.getId());
+        // Retrieve Pending and In-Progress Bookings
+        List<Booking> pendingBookings = bookingService.getAllPendingBookings();
+        List<Booking> inProgressBookings = bookingService.getAllInProgressBookings(); // Fix: Avoid duplicate doGet
 
         request.setAttribute("loggedUser", loggedUser);
-        request.setAttribute("assignedBookings", assignedBookings);
+        request.setAttribute("pendingBookings", pendingBookings);
+        request.setAttribute("inProgressBookings", inProgressBookings);
 
         request.getRequestDispatcher("driver-dashboard.jsp").forward(request, response);
     }
 
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("login.jsp?error=Please login first");
+            response.sendRedirect("login.jsp?error=" + URLEncoder.encode("Please login first", StandardCharsets.UTF_8));
             return;
         }
 
         User loggedUser = (User) session.getAttribute("user");
 
         if (!"Driver".equals(loggedUser.getRole())) {
-            response.sendRedirect("login.jsp?error=Unauthorized access");
+            response.sendRedirect("login.jsp?error=" + URLEncoder.encode("Unauthorized access", StandardCharsets.UTF_8));
             return;
         }
 
@@ -75,12 +81,12 @@ public class DriverController extends HttpServlet {
                 boolean updated = bookingService.updateBookingStatus(bookingId, newStatus);
 
                 if (updated) {
-                    response.sendRedirect("driver-dashboard?message=Booking status updated successfully");
+                    response.sendRedirect("driver-dashboard?message=" + URLEncoder.encode("Booking status updated successfully", StandardCharsets.UTF_8));
                 } else {
-                    response.sendRedirect("driver-dashboard?error=Failed to update booking status");
+                    response.sendRedirect("driver-dashboard?error=" + URLEncoder.encode("Failed to update booking status", StandardCharsets.UTF_8));
                 }
             } catch (NumberFormatException e) {
-                response.sendRedirect("driver-dashboard?error=Invalid booking ID");
+                response.sendRedirect("driver-dashboard?error=" + URLEncoder.encode("Invalid booking ID", StandardCharsets.UTF_8));
             }
         }
     }

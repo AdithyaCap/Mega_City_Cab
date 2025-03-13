@@ -14,4 +14,5 @@ public class LoginService {
         // Call DAO to get user from the database and verify credentials
         return userDAO.authenticate(username, password);
     }
+
 }
