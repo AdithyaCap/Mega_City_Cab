@@ -11,5 +11,6 @@ class LoginServiceTest {
     @Test
     void authenticateUser() {
         LoginService loginService = new LoginService();
+        assertNotNull(loginService.authenticateUser("admin", "123"));
     }
 }

@@ -17,19 +17,23 @@ class UserServiceTest {
     @Test
     void getAllDrivers() {
        List<User> drivers = userService.getAllDrivers();
+       assertNotNull(drivers);
     }
 
     @Test
     void registerUser() {
         // Create a new user
-        User newUser = new User("john_doe", "123 Main St", "NIC123", "123456789", "john@example.com", "password123", "ADMIN");
+        User newUser = new User("john", "123 Main St", "NIC123", "123456789", "john@example.com", "password123", "ADMIN");
 
         // Call the method
         boolean result = userService.registerUser(newUser);
+
+        assertTrue(result);
     }
 
     @Test
     void getAllUsers() {
         List<User> users = userService.getAllUsers();
+        assertNotNull(users);
     }
 }

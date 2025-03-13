@@ -46,14 +46,16 @@ class BookingServiceTest {
     void getAllBookings() {
         List<Booking> result = bookingService.getAllBookings();
 
+        assertNotNull(result);
+
     }
 
 
     @Test
     void updateBookingStatus() {
 
-
         boolean result = bookingService.updateBookingStatus(1, "confirmed");
+        assertTrue("passed", result);
     }
 
 

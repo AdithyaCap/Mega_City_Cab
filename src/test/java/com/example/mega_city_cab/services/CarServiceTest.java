@@ -14,5 +14,6 @@ class CarServiceTest {
     @Test
     void getAllCars() {
         List<Car> result = carService.getAllCars();
+        assertNotNull(result);
     }
 }
