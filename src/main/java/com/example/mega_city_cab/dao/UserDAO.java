@@ -24,6 +24,8 @@ public class UserDAO {
                     user.setId(rs.getInt("user_id"));
                     user.setUsername(rs.getString("username"));
                     user.setRole(rs.getString("role"));
+                    user.setEmail(rs.getString("email"));
+                    user.setAddress(rs.getString("address"));
                 }
             }
         } catch (SQLException e) {

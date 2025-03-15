@@ -13,8 +13,7 @@
 
 <%
   // Simulate user session (in real case, pull this from actual logged-in user)
-  HttpSession userSession = request.getSession(false);
-  User username = (User) userSession.getAttribute("username");
+  User loggedUser = (User) session.getAttribute("user");
 
   List<Booking> bookingList = (List<Booking>) request.getAttribute("bookings");
   List<Booking> inProgressBookings = (List<Booking>) request.getAttribute("inProgressBookings");
@@ -30,7 +29,7 @@
 <body>
 <div class="container">
   <header>
-    <h1>Welcome, <%= username %>!</h1>
+    <h1>Welcome, <%= loggedUser.getUsername() %>!</h1>
     <p><a href="logout.jsp" class="logout-link">Logout</a></p>
   </header>
 
